@@ -1,0 +1,132 @@
+{
+    "version": 4,
+    "configurePresets": [
+        {
+            "name": "project",
+            "hidden": true,
+            "environment": {
+                "WORKSPACE_POSTFIX": "$env{WORKSPACE_OS}/$env{WORKSPACE_ARCH}/$env{WORKSPACE_COMPILER}/$env{WORKSPACE_BUILD_TYPE}"
+            },
+            "binaryDir": "${sourceDir}/out/build/$env{WORKSPACE_POSTFIX}",
+            "installDir": "${sourceDir}/out/install/$env{WORKSPACE_POSTFIX}",
+            "cacheVariables": {
+                "CMAKE_MODULE_PATH": "$env{WORKSPACE_ROOT}/CMake/Modules",
+                "CMAKE_PREFIX_PATH": "$env{WORKSPACE_ROOT}/C++/libraries/$env{WORKSPACE_POSTFIX}/cmake"
+            }
+        },
+
+        {
+            "name": "windows",
+            "hidden": true,
+            "environment": {
+                "WORKSPACE_OS": "Windows",
+                "WORKSPACE_ROOT": "D:"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "linux",
+            "hidden": true,
+            "environment": {
+                "WORKSPACE_OS": "Ubuntu",
+                "WORKSPACE_ROOT": "/media/vladween/Coding"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        },
+
+        {
+            "name": "x64",
+            "hidden": true,
+            "environment": {
+                "WORKSPACE_ARCH": "x64"
+            }
+        },
+        {
+            "name": "x32",
+            "hidden": true,
+            "environment": {
+                "WORKSPACE_ARCH": "x32"
+            }
+        },
+        {
+            "name": "m32",
+            "hidden": true,
+            "inherits": ["x32"],
+            "cacheVariables": {
+                "CMAKE_C_FLAGS": "-m32",
+                "CMAKE_CXX_FLAGS": "-m32",
+                "CMAKE_EXE_LINKER_FLAGS": "-m32",
+                "CMAKE_SHARED_LINKER_FLAGS": "-m32",
+                "CMAKE_MODULE_LINKER_FLAGS": "-m32"
+            }
+        },
+
+        {
+            "name": "debug",
+            "hidden": true,
+            "environment": {
+                "WORKSPACE_BUILD_TYPE": "Debug"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "hidden": true,
+            "environment": {
+                "WORKSPACE_BUILD_TYPE": "Release"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+
+        {
+            "name": "mingw",
+            "hidden": true,
+            "inherits": ["windows"],
+            "generator": "MinGW Makefiles",
+            "environment": {
+                "WORKSPACE_COMPILER": "MinGW"
+            },
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "E:/Utilities/MSYS2/ucrt64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "E:/Utilities/MSYS2/ucrt64/bin/g++.exe",
+                "CMAKE_MAKE_PROGRAM": "E:/Utilities/MSYS2/ucrt64/bin/mingw32-make.exe"
+            }
+        },
+        {
+            "name": "mingw-x64-debug",
+            "displayName": "MinGW x64 Debug",
+            "description": "Default build using MSYS2 MinGW for x64 architecture in Debug mode",
+            "inherits": ["mingw", "x64", "debug", "project"]
+        },
+        {
+            "name": "mingw-x64-release",
+            "displayName": "MinGW x64 Release",
+            "description": "Default build using MSYS2 MinGW for x64 architecture in Release mode",
+            "inherits": ["mingw", "x64", "release", "project"]
+        },
+        {
+            "name": "mingw-x32-debug",
+            "displayName": "MinGW x32 Debug",
+            "description": "Default build using MSYS2 MinGW for x32 architecture in Debug mode",
+            "inherits": ["mingw", "m32", "debug", "project"]
+        },
+        {
+            "name": "mingw-x32-release",
+            "displayName": "MinGW x32 Release",
+            "description": "Default build using MSYS2 MinGW for x32 architecture in Release mode",
+            "inherits": ["mingw", "x32", "release", "project"]
+        }
+    ]
+}

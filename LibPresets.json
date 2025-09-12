@@ -1,0 +1,43 @@
+{
+    "version": 4,
+    "include": [
+        "Presets.json"
+    ],
+    "configurePresets": [
+        {
+            "name": "library",
+            "hidden": true,
+            "inherits": ["project"],
+            "installDir": "$env{WORKSPACE_ROOT}/C++/libraries",
+            "cacheVariables": {
+                "CMAKE_INSTALL_BINDIR": "$env{WORKSPACE_ROOT}/C++/libraries/bin/${WORKSPACE_POSTFIX}",
+                "CMAKE_INSTALL_LIBDIR": "$env{WORKSPACE_ROOT}/C++/libraries/lib/${WORKSPACE_POSTFIX}"
+            }
+        },
+
+        {
+            "name": "mingw-x64-debug-lib",
+            "displayName": "MinGW x64 Debug Library",
+            "description": "Library build using MSYS2 MinGW for x64 architecture in Debug mode",
+            "inherits": ["mingw", "x64", "debug", "library"]
+        },
+        {
+            "name": "mingw-x64-release-lib",
+            "displayName": "MinGW x64 Release Library",
+            "description": "Library build using MSYS2 MinGW for x64 architecture in Release mode",
+            "inherits": ["mingw", "x64", "release", "library"]
+        },
+        {
+            "name": "mingw-x32-debug-lib",
+            "displayName": "MinGW x32 Debug Library",
+            "description": "Library build using MSYS2 MinGW for x32 architecture in Debug mode",
+            "inherits": ["mingw", "m32", "debug", "library"]
+        },
+        {
+            "name": "mingw-x32-release-lib",
+            "displayName": "MinGW x32 Release Library",
+            "description": "Library build using MSYS2 MinGW for x32 architecture in Release mode",
+            "inherits": ["mingw", "m32", "release", "library"]
+        }
+    ]
+}
