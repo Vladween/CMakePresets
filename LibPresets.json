@@ -8,12 +8,14 @@
             "name": "library",
             "hidden": true,
             "inherits": ["project"],
+            "binaryDir": "${sourceDir}/build/$env{WORKSPACE_POSTFIX}",
             "installDir": "$env{WORKSPACE_ROOT}/C++/libraries",
             "cacheVariables": {
-                "CMAKE_INSTALL_BINDIR": "$env{WORKSPACE_ROOT}/C++/libraries/bin/${WORKSPACE_POSTFIX}",
-                "CMAKE_INSTALL_LIBDIR": "$env{WORKSPACE_ROOT}/C++/libraries/lib/${WORKSPACE_POSTFIX}"
+                "CMAKE_INSTALL_BINDIR": "$env{WORKSPACE_ROOT}/C++/libraries/bin/$env{WORKSPACE_POSTFIX}",
+                "CMAKE_INSTALL_LIBDIR": "$env{WORKSPACE_ROOT}/C++/libraries/lib/$env{WORKSPACE_POSTFIX}"
             }
         },
+
 
         {
             "name": "mingw-x64-debug-lib",
@@ -38,6 +40,84 @@
             "displayName": "MinGW x32 Release Library",
             "description": "Library build using MSYS2 MinGW for x32 architecture in Release mode",
             "inherits": ["mingw", "m32", "release", "library"]
-        }
+        },
+
+
+        {
+            "name": "msvc-x64-debug-lib",
+            "displayName": "NSVC x64 Debug Library",
+            "description": "Library build using MSVC for x64 architecture in Debug mode",
+            "inherits": ["msvc-x64", "debug", "library"]
+        },
+        {
+            "name": "msvc-x64-release-lib",
+            "displayName": "NSVC x64 Release Library",
+            "description": "Library build using MSVC for x64 architecture in Release mode",
+            "inherits": ["msvc-x64", "release", "library"]
+        },
+        {
+            "name": "msvc-x32-debug-lib",
+            "displayName": "NSVC x32 Debug Library",
+            "description": "Library build using MSVC for x32 architecture in Debug mode",
+            "inherits": ["msvc-x32", "debug", "library"]
+        },
+        {
+            "name": "msvc-x32-release-lib",
+            "displayName": "NSVC x32 Release Library",
+            "description": "Library build using MSVC for x32 architecture in Release mode",
+            "inherits": ["msvc-x32", "release", "library"]
+        },
+
+        
+        {
+            "name": "windows-clang-x64-debug-lib",
+            "displayName": "Clang x64 Debug Library",
+            "description": "Library build using Clang for x64 architecture in Debug mode",
+            "inherits": ["windows-clang-x64", "debug", "library"]
+        },
+        {
+            "name": "windows-clang-x64-release-lib",
+            "displayName": "Clang x64 Release Library",
+            "description": "Library build using Clang for x64 architecture in Release mode",
+            "inherits": ["windows-clang-x64", "release", "library"]
+        },
+        {
+            "name": "windows-clang-x32-debug-lib",
+            "displayName": "Clang x32 Debug Library",
+            "description": "Library build using Clang for x32 architecture in Debug mode",
+            "inherits": ["windows-clang-x32", "debug", "library"]
+        },
+        {
+            "name": "windows-clang-x32-release-lib",
+            "displayName": "Clang x32 Release Library",
+            "description": "Library build using Clang for x32 architecture in Release mode",
+            "inherits": ["windows-clang-x32", "release", "library"]
+        },
+
+
+        {
+            "name": "gcc-x64-debug-lib",
+            "displayName": "GCC x64 Debug Library",
+            "description": "Library build using GCC for x64 architecture in Debug mode",
+            "inherits": ["gcc-x64", "debug", "library"]
+        },
+        {
+            "name": "gcc-x64-release-lib",
+            "displayName": "GCC x64 Release Library",
+            "description": "Library build using GCC for x64 architecture in Release mode",
+            "inherits": ["gcc-x64", "release", "library"]
+        },
+        {
+            "name": "gcc-x32-debug-lib",
+            "displayName": "GCC x32 Debug Library",
+            "description": "Library build using GCC for x32 architecture in Debug mode",
+            "inherits": ["gcc-x32", "debug", "library"]
+        },
+        {
+            "name": "gcc-x32-release-lib",
+            "displayName": "GCC x32 Release Library",
+            "description": "Library build using GCC for x32 architecture in Release mode",
+            "inherits": ["gcc-x32", "release", "library"]
+        }        
     ]
 }

@@ -4,6 +4,7 @@
         {
             "name": "project",
             "hidden": true,
+            "generator": "Ninja",
             "environment": {
                 "WORKSPACE_POSTFIX": "$env{WORKSPACE_OS}/$env{WORKSPACE_ARCH}/$env{WORKSPACE_COMPILER}/$env{WORKSPACE_BUILD_TYPE}"
             },
@@ -11,7 +12,7 @@
             "installDir": "${sourceDir}/out/install/$env{WORKSPACE_POSTFIX}",
             "cacheVariables": {
                 "CMAKE_MODULE_PATH": "$env{WORKSPACE_ROOT}/CMake/Modules",
-                "CMAKE_PREFIX_PATH": "$env{WORKSPACE_ROOT}/C++/libraries/$env{WORKSPACE_POSTFIX}/cmake"
+                "CMAKE_PREFIX_PATH": "$env{WORKSPACE_ROOT}/C++/libraries/lib/$env{WORKSPACE_POSTFIX}/cmake"
             }
         },
 
@@ -56,18 +57,6 @@
                 "WORKSPACE_ARCH": "x32"
             }
         },
-        {
-            "name": "m32",
-            "hidden": true,
-            "inherits": ["x32"],
-            "cacheVariables": {
-                "CMAKE_C_FLAGS": "-m32",
-                "CMAKE_CXX_FLAGS": "-m32",
-                "CMAKE_EXE_LINKER_FLAGS": "-m32",
-                "CMAKE_SHARED_LINKER_FLAGS": "-m32",
-                "CMAKE_MODULE_LINKER_FLAGS": "-m32"
-            }
-        },
 
         {
             "name": "debug",
@@ -90,43 +79,220 @@
             }
         },
 
+
         {
             "name": "mingw",
             "hidden": true,
             "inherits": ["windows"],
-            "generator": "MinGW Makefiles",
             "environment": {
                 "WORKSPACE_COMPILER": "MinGW"
-            },
+            }
+        },
+        {
+            "name": "mingw-x64",
+            "hidden": true,
+            "inherits": ["mingw", "x64"],
+            "cmakeExecutable": "E:/Utilities/MSYS2/ucrt64/bin/cmake.exe",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "E:/Utilities/MSYS2/ucrt64/bin/gcc.exe",
-                "CMAKE_CXX_COMPILER": "E:/Utilities/MSYS2/ucrt64/bin/g++.exe",
-                "CMAKE_MAKE_PROGRAM": "E:/Utilities/MSYS2/ucrt64/bin/mingw32-make.exe"
+                "CMAKE_CXX_COMPILER": "E:/Utilities/MSYS2/ucrt64/bin/g++.exe"
+            }
+        },
+        {
+            "name": "mingw-x32",
+            "hidden": true,
+            "inherits": ["mingw", "x32"],
+            "cmakeExecutable": "E:/Utilities/MSYS2/mingw32/bin/cmake.exe",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "E:/Utilities/MSYS2/mingw32/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "E:/Utilities/MSYS2/mingw32/bin/g++.exe"
             }
         },
         {
             "name": "mingw-x64-debug",
             "displayName": "MinGW x64 Debug",
             "description": "Default build using MSYS2 MinGW for x64 architecture in Debug mode",
-            "inherits": ["mingw", "x64", "debug", "project"]
+            "inherits": ["mingw-x64", "debug", "project"]
         },
         {
             "name": "mingw-x64-release",
             "displayName": "MinGW x64 Release",
             "description": "Default build using MSYS2 MinGW for x64 architecture in Release mode",
-            "inherits": ["mingw", "x64", "release", "project"]
+            "inherits": ["mingw-x64", "release", "project"]
         },
         {
             "name": "mingw-x32-debug",
             "displayName": "MinGW x32 Debug",
             "description": "Default build using MSYS2 MinGW for x32 architecture in Debug mode",
-            "inherits": ["mingw", "m32", "debug", "project"]
+            "inherits": ["mingw-x32", "debug", "project"]
         },
         {
             "name": "mingw-x32-release",
             "displayName": "MinGW x32 Release",
             "description": "Default build using MSYS2 MinGW for x32 architecture in Release mode",
-            "inherits": ["mingw", "x32", "release", "project"]
+            "inherits": ["mingw-x32", "release", "project"]
+        },
+
+
+        {
+            "name": "msvc",
+            "hidden": true,
+            "inherits": ["windows"],
+            "cmakeExecutable": "E:/Programs/VisualStudio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+            "environment": {
+                "WORKSPACE_COMPILER": "MSVC"
+            },
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe"
+            }
+        },
+        {
+            "name": "msvc-x64",
+            "hidden": true,
+            "inherits": ["msvc", "x64"],
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            }
+        },
+        {
+            "name": "msvc-x32",
+            "hidden": true,
+            "inherits": ["msvc", "x32"],
+            "architecture": {
+                "value": "x86",
+                "strategy": "external"
+            }
+        },
+        {
+            "name": "msvc-x64-debug",
+            "displayName": "MSVC x64 Debug",
+            "description": "Default build using MSVC for x64 architecture in Debug mode",
+            "inherits": ["msvc-x64", "debug", "project"]
+        },
+        {
+            "name": "msvc-x64-release",
+            "displayName": "MSVC x64 Release",
+            "description": "Default build using MSVC for x64 architecture in Release mode",
+            "inherits": ["msvc-x64", "release", "project"]
+        },
+        {
+            "name": "msvc-x32-debug",
+            "displayName": "MSVC x32 Debug",
+            "description": "Default build using MSVC for x32 architecture in Debug mode",
+            "inherits": ["msvc-x32", "debug", "project"]
+        },
+        {
+            "name": "msvc-x32-release",
+            "displayName": "MSVC x32 Release",
+            "description": "Default build using MSVC for x32 architecture in Release mode",
+            "inherits": ["msvc-x32", "release", "project"]
+        },
+
+
+        {
+            "name": "gcc",
+            "hidden": true,
+            "inherits": ["linux"],
+            "cmakeExecutable": "/usr/bin/cmake",
+            "environment": {
+                "WORKSPACE_COMPILER": "GCC"
+            }
+        },
+        {
+            "name": "gcc-x64",
+            "hidden": true,
+            "inherits": ["gcc", "x64"]
+        },
+        {
+            "name": "gcc-x32",
+            "hidden": true,
+            "inherits": ["gcc", "x32"],
+            "cacheVariables": {
+                "CMAKE_C_FLAGS": "-m32",
+                "CMAKE_CXX_FLAGS": "-m32",
+                "CMAKE_EXE_LINKER_FLAGS": "-m32",
+                "CMAKE_SHARED_LINKER_FLAGS": "-m32",
+                "CMAKE_MODULE_LINKER_FLAGS": "-m32"
+            }
+        },
+        {
+            "name": "gcc-x64-debug",
+            "displayName": "GCC x64 Debug",
+            "description": "Default build using GCC for x64 architecture in Debug mode",
+            "inherits": ["gcc-x64", "debug", "project"]
+        },
+        {
+            "name": "gcc-x64-release",
+            "displayName": "GCC x64 Release",
+            "description": "Default build using GCC for x64 architecture in Release mode",
+            "inherits": ["gcc-x64", "release", "project"]
+        },
+        {
+            "name": "gcc-x32-debug",
+            "displayName": "GCC x32 Debug",
+            "description": "Default build using GCC for x32 architecture in Debug mode",
+            "inherits": ["gcc-x32", "debug", "project"]
+        },
+        {
+            "name": "gcc-x32-release",
+            "displayName": "GCC x32 Release",
+            "description": "Default build using GCC for x32 architecture in Release mode",
+            "inherits": ["gcc-x32", "release", "project"]
+        },
+        
+
+        {
+            "name": "clang",
+            "hidden": true,
+            "environment": {
+                "WORKSPACE_COMPILER": "Clang"                
+            }
+        },
+        {
+            "name": "windows-clang-x64",
+            "hidden": true,
+            "inherits": ["windows", "clang", "x64"],
+            "cmakeExecutable": "E:/Utilities/MSYS2/clang64/bin/cmake.exe",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "E:/Utilities/MSYS2/clang64/bin/clang.exe",
+                "CMAKE_CXX_COMPILER": "E:/Utilities/MSYS2/clang64/bin/clang++.exe"
+            }
+        },
+        {
+            "name": "windows-clang-x32",
+            "hidden": true,
+            "inherits": ["windows", "clang", "x32"],
+            "cmakeExecutable": "E:/Utilities/MSYS2/mingw32/bin/cmake.exe",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "E:/Utilities/MSYS2/mingw32/bin/clang.exe",
+                "CMAKE_CXX_COMPILER": "E:/Utilities/MSYS2/mingw32/bin/clang++.exe"
+            }
+        },
+        {
+            "name": "windows-clang-x64-debug",
+            "displayName": "Clang x64 Debug",
+            "description": "Default build using Clang for x64 architecture in Debug mode",
+            "inherits": ["windows-clang-x64", "debug", "project"]
+        },
+        {
+            "name": "windows-clang-x64-release",
+            "displayName": "Clang x64 Release",
+            "description": "Default build using Clang for x64 architecture in Release mode",
+            "inherits": ["windows-clang-x64", "release", "project"]
+        },
+        {
+            "name": "windows-clang-x32-debug",
+            "displayName": "Clang x32 Debug",
+            "description": "Default build using Clang for x32 architecture in Debug mode",
+            "inherits": ["windows-clang-x32", "debug", "project"]
+        },
+        {
+            "name": "windows-clang-x32-release",
+            "displayName": "Clang x32 Release",
+            "description": "Default build using Clang for x32 architecture in Release mode",
+            "inherits": ["windows-clang-x32", "release", "project"]
         }
     ]
 }
