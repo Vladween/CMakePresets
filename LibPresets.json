@@ -68,6 +68,32 @@
             "inherits": ["msvc-x32", "release", "library"]
         },
 
+
+        {
+            "name": "gcc-x64-debug-lib",
+            "displayName": "GCC x64 Debug Library",
+            "description": "Library build using GCC for x64 architecture in Debug mode",
+            "inherits": ["gcc-x64", "debug", "library"]
+        },
+        {
+            "name": "gcc-x64-release-lib",
+            "displayName": "GCC x64 Release Library",
+            "description": "Library build using GCC for x64 architecture in Release mode",
+            "inherits": ["gcc-x64", "release", "library"]
+        },
+        {
+            "name": "gcc-x32-debug-lib",
+            "displayName": "GCC x32 Debug Library",
+            "description": "Library build using GCC for x32 architecture in Debug mode",
+            "inherits": ["gcc-x32", "debug", "library"]
+        },
+        {
+            "name": "gcc-x32-release-lib",
+            "displayName": "GCC x32 Release Library",
+            "description": "Library build using GCC for x32 architecture in Release mode",
+            "inherits": ["gcc-x32", "release", "library"]
+        },
+        
         
         {
             "name": "windows-clang-x64-debug-lib",
@@ -96,28 +122,28 @@
 
 
         {
-            "name": "gcc-x64-debug-lib",
-            "displayName": "GCC x64 Debug Library",
-            "description": "Library build using GCC for x64 architecture in Debug mode",
-            "inherits": ["gcc-x64", "debug", "library"]
+            "name": "linux-clang-x64-debug-lib",
+            "displayName": "Clang x64 Debug Library",
+            "description": "Library build using Clang for x64 architecture in Debug mode",
+            "inherits": ["linux-clang-x64", "debug", "library"]
         },
         {
-            "name": "gcc-x64-release-lib",
-            "displayName": "GCC x64 Release Library",
-            "description": "Library build using GCC for x64 architecture in Release mode",
-            "inherits": ["gcc-x64", "release", "library"]
+            "name": "linux-clang-x64-release-lib",
+            "displayName": "Clang x64 Release Library",
+            "description": "Library build using Clang for x64 architecture in Release mode",
+            "inherits": ["linux-clang-x64", "release", "library"]
         },
         {
-            "name": "gcc-x32-debug-lib",
-            "displayName": "GCC x32 Debug Library",
-            "description": "Library build using GCC for x32 architecture in Debug mode",
-            "inherits": ["gcc-x32", "debug", "library"]
+            "name": "linux-clang-x32-debug-lib",
+            "displayName": "Clang x32 Debug Library",
+            "description": "Library build using Clang for x32 architecture in Debug mode",
+            "inherits": ["linux-clang-x32", "debug", "library"]
         },
         {
-            "name": "gcc-x32-release-lib",
-            "displayName": "GCC x32 Release Library",
-            "description": "Library build using GCC for x32 architecture in Release mode",
-            "inherits": ["gcc-x32", "release", "library"]
-        }        
+            "name": "linux-clang-x32-release-lib",
+            "displayName": "Clang x32 Release Library",
+            "description": "Library build using Clang for x32 architecture in Release mode",
+            "inherits": ["linux-clang-x32", "release", "library"]
+        }
     ]
 }

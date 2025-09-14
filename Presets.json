@@ -57,6 +57,18 @@
                 "WORKSPACE_ARCH": "x32"
             }
         },
+        {
+            "name": "m32",
+            "hidden": true,
+            "inherits": ["x32"],
+            "cacheVariables": {
+                "CMAKE_C_FLAGS": "-m32",
+                "CMAKE_CXX_FLAGS": "-m32",
+                "CMAKE_EXE_LINKER_FLAGS": "-m32",
+                "CMAKE_SHARED_LINKER_FLAGS": "-m32",
+                "CMAKE_MODULE_LINKER_FLAGS": "-m32"
+            }
+        },
 
         {
             "name": "debug",
@@ -208,14 +220,7 @@
         {
             "name": "gcc-x32",
             "hidden": true,
-            "inherits": ["gcc", "x32"],
-            "cacheVariables": {
-                "CMAKE_C_FLAGS": "-m32",
-                "CMAKE_CXX_FLAGS": "-m32",
-                "CMAKE_EXE_LINKER_FLAGS": "-m32",
-                "CMAKE_SHARED_LINKER_FLAGS": "-m32",
-                "CMAKE_MODULE_LINKER_FLAGS": "-m32"
-            }
+            "inherits": ["gcc", "m32"]
         },
         {
             "name": "gcc-x64-debug",
@@ -293,6 +298,50 @@
             "displayName": "Clang x32 Release",
             "description": "Default build using Clang for x32 architecture in Release mode",
             "inherits": ["windows-clang-x32", "release", "project"]
+        },
+
+        {
+            "name": "linux-clang",
+            "hidden": true,
+            "inherits": ["linux", "clang"],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "/usr/bin/clang",
+                "CMAKE_CXX_COMPILER": "/usr/bin/clang++"
+            }
+        },
+        {
+            "name": "linux-clang-x64",
+            "hidden": true,
+            "inherits": ["linux-clang", "x64"]
+        },
+        {
+            "name": "linux-clang-x32",
+            "hidden": true,
+            "inherits": ["linux-clang", "m32"]
+        },
+        {
+            "name": "linux-clang-x64-debug",
+            "displayName": "Clang x64 Debug",
+            "description": "Default build using Clang for x64 architecture in Debug mode",
+            "inherits": ["linux-clang-x64", "debug", "project"]
+        },
+        {
+            "name": "linux-clang-x64-release",
+            "displayName": "Clang x64 Release",
+            "description": "Default build using Clang for x64 architecture in Release mode",
+            "inherits": ["linux-clang-x64", "release", "project"]
+        },
+        {
+            "name": "linux-clang-x32-debug",
+            "displayName": "Clang x32 Debug",
+            "description": "Default build using Clang for x32 architecture in Debug mode",
+            "inherits": ["linux-clang-x32", "debug", "project"]
+        },
+        {
+            "name": "linux-clang-x32-release",
+            "displayName": "Clang x32 Release",
+            "description": "Default build using Clang for x32 architecture in Release mode",
+            "inherits": ["linux-clang-x32", "release", "project"]
         }
     ]
 }
